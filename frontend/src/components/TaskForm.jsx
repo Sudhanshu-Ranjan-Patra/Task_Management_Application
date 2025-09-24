@@ -5,22 +5,18 @@ import { createTask, updateTask } from "../store/taskSlice";
 const TaskForm = ({ editingTask, clearEditing }) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({
-    title: "",
-    description: "",
-    dueDate: "",
-    priority: "medium",
+  title: "",
+  description: ""
   });
 
   useEffect(() => {
     if (editingTask) {
       setForm({
         title: editingTask.title || "",
-        description: editingTask.description || "",
-        dueDate: editingTask.dueDate ? editingTask.dueDate.slice(0, 10) : "",
-        priority: editingTask.priority || "medium",
+        description: editingTask.description || ""
       });
     } else {
-      setForm({ title: "", description: "", dueDate: "", priority: "medium" });
+      setForm({ title: "", description: "" });
     }
   }, [editingTask]);
 
@@ -33,7 +29,7 @@ const TaskForm = ({ editingTask, clearEditing }) => {
     } else {
       dispatch(createTask({ ...form }));
     }
-    setForm({ title: "", description: "", dueDate: "", priority: "medium" });
+  setForm({ title: "", description: "" });
   };
 
   return (
@@ -60,45 +56,8 @@ const TaskForm = ({ editingTask, clearEditing }) => {
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
 
-        {/* Extra checkbox text */}
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={form.special || false}
-            onChange={(e) => setForm({ ...form, special: e.target.checked })}
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-          />
-          <label className="text-gray-700 text-sm">
-            Choose time and importance level for this task
-          </label>
-        </div>
 
-        {/* Date + Time + Priority */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <input
-            type="date"
-            value={form.dueDate || ""}
-            onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
-            className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-
-          <input
-            type="time"
-            value={form.dueTime || ""}
-            onChange={(e) => setForm({ ...form, dueTime: e.target.value })}
-            className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-
-          <select
-            value={form.priority}
-            onChange={(e) => setForm({ ...form, priority: e.target.value })}
-            className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        </div>
+        {/* ...existing code... */}
 
         {/* Buttons */}
         <div className="flex gap-3">

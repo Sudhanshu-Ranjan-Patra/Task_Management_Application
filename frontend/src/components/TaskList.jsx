@@ -5,24 +5,19 @@ import { deleteTask, updateTask } from '../store/taskSlice';
 const TaskList = ({ tasks, setEditing }) => {
   const dispatch = useDispatch();
 
-  const toggleStatus = (task) => {
-    dispatch(updateTask({ id: task._id, payload: { status: task.status === 'pending' ? 'completed' : 'pending' } }));
-  };
+  // ...existing code...
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 ml-5">
       {tasks.length === 0 && <div className="card">No tasks yet. Add your first task!</div>}
       {tasks.map(t => (
-        <div key={t._id} className="card flex items-start justify-between gap-4">
+        <div key={t._id} className="card flex items-start justify-between gap-4 bg-blue-200 px-5 py-3 rounded-2xl">
           <div>
             <div className="flex items-center gap-3">
-              <input type="checkbox" checked={t.status === 'completed'} onChange={() => toggleStatus(t)} />
+              {/* Checkbox removed: status feature not needed */}
               <div>
-                <div className={`font-semibold ${t.status === 'completed' ? 'line-through text-gray-400' : ''}`}>{t.title}</div>
+                <div className="font-semibold">{t.title}</div>
                 <div className="text-sm text-gray-600">{t.description}</div>
-                <div className="text-xs text-gray-500 mt-1">
-                  {t.priority} • {t.dueDate ? new Date(t.dueDate).toLocaleDateString() : 'No due date'}
-                </div>
               </div>
             </div>
           </div>
