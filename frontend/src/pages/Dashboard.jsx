@@ -22,38 +22,65 @@ const Dashboard = () => {
     dispatch(logout());
     nav("/login");
   };
-
-  return (
-    <div className="container mt-6 px-30 ml-10">
-      <div className="flex items-center justify-between mb-4">
+return (
+  <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <header className="w-full bg-white/70 backdrop-blur-md shadow-sm">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-10 py-4">
         <div>
-          <h1 className="text-2xl font-bold">Hello, {user?.name}</h1>
-          <p className="text-sm text-gray-600">Manage your tasks</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+            Hello, {user?.name?.split(" ")[0]} 👋
+          </h1>
+          <p className="text-sm text-gray-600">Manage your tasks effectively</p>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={handleLogout}
-            className="p-2 rounded bg-red-500 text-white"
+            className="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-medium transition-colors duration-200"
           >
             Logout
           </button>
         </div>
       </div>
+    </header>
 
+    {/* Stats Section */}
+    <section className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-10 mt-6">
       <Stats tasks={tasks} />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex justify-center items-start p-6">
-        <TaskForm
-          editingTask={editingTask}
-          clearEditing={() => setEditingTask(null)}
-        />
-        {loading ? (
-          <div className="card">Loading tasks...</div>
-        ) : (
-          <TaskList tasks={tasks} setEditing={setEditingTask} />
-        )}
-      </div>
-    </div>
-  );
-};
+    </section>
 
+    {/* Dashboard Main Content */}
+    <main className="flex-1 w-full mt-6 px-4 sm:px-6 lg:px-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-2">
+        {/* Left Side - Task Form */}
+        <aside className="lg:col-span-1">
+          <div className="bg-white shadow-lg rounded-2xl p-6 sticky top-20">
+            <TaskForm
+              editingTask={editingTask}
+              clearEditing={() => setEditingTask(null)}
+            />
+          </div>
+        </aside>
+
+        {/* Right Side - Task List */}
+        <section className="lg:col-span-2">
+          {loading ? (
+            <div className="p-6 text-center bg-white rounded-2xl shadow-lg">
+              <span className="animate-pulse text-gray-500">
+                Loading tasks...
+              </span>
+            </div>
+          ) : (
+            <TaskList tasks={tasks} setEditing={setEditingTask} />
+          )}
+        </section>
+      </div>
+    </main>
+
+    {/* Footer */}
+    <footer className="mt-10 py-6 text-center text-gray-500 text-sm">
+      © {new Date().getFullYear()} Task Manager. Built by DearCode.
+    </footer>
+  </div>
+);
+};
 export default Dashboard;
