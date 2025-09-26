@@ -5,15 +5,15 @@ import { createTask, updateTask } from "../store/taskSlice";
 const TaskForm = ({ editingTask, clearEditing }) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({
-  title: "",
-  description: ""
+    title: "",
+    description: "",
   });
 
   useEffect(() => {
     if (editingTask) {
       setForm({
         title: editingTask.title || "",
-        description: editingTask.description || ""
+        description: editingTask.description || "",
       });
     } else {
       setForm({ title: "", description: "" });
@@ -29,7 +29,7 @@ const TaskForm = ({ editingTask, clearEditing }) => {
     } else {
       dispatch(createTask({ ...form }));
     }
-  setForm({ title: "", description: "" });
+    setForm({ title: "", description: "" });
   };
 
   return (
@@ -55,7 +55,6 @@ const TaskForm = ({ editingTask, clearEditing }) => {
           rows={3}
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
-
 
         {/* ...existing code... */}
 

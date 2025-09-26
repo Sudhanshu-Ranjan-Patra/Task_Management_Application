@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Stats = ({ tasks }) => {
   const total = tasks.length;
-  const completed = tasks.filter(t => t.status === 'completed').length;
+  const completed = tasks.filter((t) => t.status === "completed").length;
   const pending = total - completed;
 
   return (
